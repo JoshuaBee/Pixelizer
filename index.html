@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<link rel="preconnect" href="https://font.gstatic.com/" crossorigin>
+
+		<title>Pixelizer</title>
+		<meta charset="utf-8" />
+		<meta name="author" content="Joshua Bee" />
+		<meta name="description" content="📷 Take a photo and pixelize it!" />
+		<!-- Let browser know website is optimized for mobile -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="icon" type="image/png" href="images/logos/logo-192.png" />
+		<link rel="apple-touch-icon" href="images/logos/logo-192.png">
+		<link rel="canonical" href="https://pixelizer.joshuabee.dev/" />
+
+		<!-- Progressive Web App -->
+		<meta name="theme-color" content="#FFD60A" />
+		<link rel="manifest" href="manifest.json" />
+
+		<!-- Settings -->
+		<link href="styles/1-settings/color.css" rel="stylesheet" />
+
+		<!-- Tools -->
+		<link href="styles/2-tools/font.css" rel="stylesheet" />
+
+		<!-- Generic -->
+		<link href="styles/3-generic/reset.css" rel="stylesheet" />
+
+		<!-- Elements -->
+		<link href="styles/4-elements/body.css" rel="stylesheet" />
+		
+		<!-- Components -->
+		<link href="styles/6-components/button.css" rel="stylesheet" />
+		<link href="styles/6-components/input.css" rel="stylesheet" />
+		<link href="styles/6-components/footer.css" rel="stylesheet" />
+		<link href="styles/6-components/header.css" rel="stylesheet" />
+		
+		<!-- Utilities -->
+		<link href="styles/7-utilities/visually-hidden.css" rel="stylesheet" />
+	</head>
+
+	<body>
+
+		<header>
+			<h1>Pixelizer</h1>
+		</header>
+
+		<main>
+			
+			<label class="button">
+				Upload a photo
+
+				<input
+					type="file"
+					class="visually-hidden"
+					id="photo_upload"
+					accept="image/png, image/jpeg"
+				/>
+			</label>
+
+			<div class="input-group">
+				<label for="pixel-size-input">
+					Pixel Size
+					<input id="pixel-size-input" type="number" data-setting="pixelSize" value="6" min="1" />
+				</label>
+			</div>
+
+			<div class="input-group">
+				<label for="use-max-unique-colors-input">
+					Use Max Number of Unique Colors
+				</label>
+				<input id="use-max-unique-colors-input" type="checkbox" data-setting="useMaxUniqueColors" checked="checked">
+			</div>
+
+			<div class="input-group">
+				<label for="max-unique-colors-input">
+					Max Number of Unique Colors
+					<input id="max-unique-colors-input" type="number" data-setting="maxUniqueColors" value="20" min="1" />
+				</label>
+			</div>
+
+			<div class="input-group">
+				<label for="max-color-distance-input">
+					Max Color Distance
+					<input id="max-unique-colors-input" type="number" data-setting="maxColorDistance" value="10" min="1" />
+				</label>
+			</div>
+
+			<canvas id="original-image" height="512" width="512"></canvas>
+
+			<canvas id="new-image" height="512" width="512"></canvas>
+
+			<button id="pixelize" class="button">
+				<span class="button__text">Pixelize</span>
+			</button>
+
+			<div class="information__container" style="display: none;">
+				<h2>Information</h2>
+
+				<p id="uniqueColorCount"></p>
+
+				<div>
+					<p>The top colors used were:</p>
+
+					<div id="topUniqueColors"></div>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<a href="https://joshuabee.dev/" target="_blank" rel="noopener noreferrer" class="footer__branding" itemscope itemtype="https://schema.org/WebSite">
+				<picture>
+					<source srcset="images/logos/company-logo-192.svg" type="image/svg+xml">
+					<img src="images/logos/company-logo-192.png" alt="Company Logo" class="footer__logo" />
+				</picture>
+				<span class="footer__title">Joshua<br />Bee</span>
+			</a>
+
+			<button id="install" type="button" class="button install-button" aria-hidden="true">
+				<span class="button__text">Install</span>
+			</button>
+		</footer>
+
+		<!-- Main Javascript -->
+		<script src="scripts/main.js"></script>
+		<script>
+			if ('serviceWorker' in navigator) {
+			  navigator.serviceWorker.register('/service-worker.js')
+			  .then(function(registration) {
+				console.log('Service worker registration successful, scope is:', registration.scope);
+			  })
+			  .catch(function(error) {
+				console.log('Service worker registration failed, error:', error);
+			  });
+			}
+		</script>
+	</body>
+</html>

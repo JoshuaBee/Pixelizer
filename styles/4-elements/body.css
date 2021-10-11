@@ -1,0 +1,19 @@
+/*--------------------------------//
+//                                //
+//              Body              //
+//                                //
+//--------------------------------*/
+body {
+	color: #FFF;
+	color: var(--color-background-text);
+	background-color: #000;
+	background-color: var(--color-background);
+	display: flex;
+    flex-direction: column;
+	min-height: 100vh;
+	
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   version="1.1"
+   id="svg3761"
+   sodipodi:docname="logo-512.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   viewBox="0 0 512 512">
+  <metadata
+     id="metadata3767">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3765" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="3840"
+     inkscape:window-height="2004"
+     id="namedview3763"
+     showgrid="false"
+     inkscape:zoom="2"
+     inkscape:cx="230.2818"
+     inkscape:cy="329.35546"
+     inkscape:window-x="4184"
+     inkscape:window-y="-16"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g3759"
+     inkscape:pagecheckerboard="false"
+     scale-x="0.375" />
+  <g
+     id="g3746"
+     transform="matrix(1.2608249,0,0,1.2625902,-24.818704,94.80963)">
+    <title
+       id="title3741">background</title>
+    <rect
+       style="fill:none"
+       x="-1"
+       y="-1"
+       width="194"
+       height="194"
+       id="canvas_background" />
+    <g
+       style="display:none"
+       id="canvasGrid"
+       display="none">
+      <rect
+         style="fill:url(#gridpattern);stroke-width:0"
+         id="svg_2"
+         width="100%"
+         height="100%"
+         x="0"
+         y="0" />
+    </g>
+  </g>
+  <g
+     id="g3759"
+     transform="matrix(1.2608249,0,0,1.2625902,-24.818704,94.80963)">
+    <title
+       id="title3748">Layer 1</title>
+    <rect
+       style="fill:#FFD60A;stroke:#000;stroke-width:0"
+       rx="26.766829"
+       x="24.533131"
+       y="-69.746933"
+       width="396.14911"
+       height="394.82672"
+       id="svg_1" />
+    <rect
+       style="fill:#000;stroke:#000;stroke-width:0"
+       id="svg_6"
+       height="51.555176"
+       width="386.37903"
+       y="128.68001"
+       x="28.950077"
+       fill-opacity="null"
+       stroke-opacity="null" />
+    <rect
+       style="fill:#FFD60A;stroke:#000;stroke-width:0"
+       id="svg_8"
+       height="51.743225"
+       width="386.37903"
+       y="75.673264"
+       x="28.950077"
+       fill-opacity="null"
+       stroke-opacity="null" />
+    <path
+       style="fill:#000;stroke:#000;stroke-width:0"
+       inkscape:connector-curvature="0"
+       d="M 421.69797,177.91518 222.13958,234.54137 22.581196,177.91518 H 421.69802 Z"
+       id="svg_4" />
+    <path
+       style="fill:#FFD60A;stroke:#000;stroke-width:0"
+       inkscape:connector-curvature="0"
+       d="M 421.69797,126.78261 222.13957,183.40877 22.581196,126.78261 H 421.69802 Z"
+       id="svg_3" />
+    <path
+       style="fill:#000;stroke:#000;stroke-width:0"
+       inkscape:connector-curvature="0"
+       d="M 421.69797,75.438728 222.13956,132.06491 22.581196,75.438728 H 421.69802 Z"
+       id="svg_9" />
+    <rect
+       style="fill:#000;stroke:#000;stroke-width:0"
+       id="svg_10"
+       height="50.687222"
+       width="396.14911"
+       y="27.328077"
+       x="24.533131"
+       fill-opacity="null"
+       stroke-opacity="null" />
+    <rect
+       style="fill:#000;stroke:#000;stroke-width:0"
+       rx="26.766829"
+       x="24.533131"
+       y="-69.746933"
+       width="396.14911"
+       height="133.38744"
+       id="svg_11" />
+    <rect
+       style="fill:#FFD60A;fill-opacity:0;stroke:#000;stroke-width:10.68884659"
+       rx="26.766829"
+       x="24.533131"
+       y="-69.746933"
+       width="396.14911"
+       height="394.82672"
+       id="svg_12" />
+  </g>
+</svg>
