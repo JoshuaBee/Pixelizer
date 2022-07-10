@@ -1,4 +1,4 @@
-const version = "1.05";
+const version = "1.06";
 const cacheName = "jb-${version}";
 
 self.addEventListener("install", e => {
@@ -10,7 +10,6 @@ self.addEventListener("install", e => {
 				"/index.html",
 				"/manifest.json",
 				"/sitemap.xml",
-				"/images/icons/arrow-down-24.svg",
 				"/images/logos/company-logo-192.png",
 				"/images/logos/company-logo-192.svg",
 				"/images/logos/company-logo-512.png",
@@ -24,11 +23,15 @@ self.addEventListener("install", e => {
 				"/styles/2-tools/font.css",
 				"/styles/3-generic/reset.css",
 				"/styles/4-elements/body.css",
+				"/styles/4-elements/canvas.css",
+				"/styles/4-elements/footer.css",
+				"/styles/4-elements/input.css",
 				"/styles/4-elements/main.css",
 				"/styles/6-components/button.css",
-				"/styles/6-components/container.css",
-				"/styles/6-components/footer.css",
-				"/styles/6-components/header.css"
+				"/styles/6-components/grid.css",
+				"/styles/6-components/information.css",
+				"/styles/7-utilities/typography.css",
+				"/styles/7-utilities/visually-hidden.css"
 			])
 			.then(() => self.skipWaiting());
 		})
