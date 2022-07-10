@@ -4,6 +4,7 @@
 //                                //
 //--------------------------------*/
 body {
+	align-items: center;
 	color: #FFF;
 	color: var(--color-background-text);
 	background-color: #000;

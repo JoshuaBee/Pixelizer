@@ -21,8 +21,13 @@ const fileTypes = [
 ];
 
 var deferredPrompt;
+var $fileInputLabel;
 var $fileInput;
+var $informationContainer;
+var $newImage;
+var $originalImage;
 var $pixelize;
+var $settings;
 
 let originalUniqueColors = {};
 let newUniqueColors = {};
@@ -34,18 +39,24 @@ const nf = Intl.NumberFormat();
 const settings = {
 	canvasHeight: 512,
 	canvasWidth: 512,
-	pixelSize: 6,
+	pixelSize: 8,
 	useMaxUniqueColors: true,
 	maxUniqueColors: 20,
 	maxColorDistance: 10
 }
 
-document.addEventListener('DOMContentLoaded', function(event) {
+document.addEventListener('DOMContentLoaded', () => {
+	$canvas = document.querySelector('canvas');
+	$fileInputLabel = document.querySelector('#upload');
 	$fileInput = document.querySelector('input[type="file"]');
-	$settings = document.querySelectorAll('[data-setting]');
+	$informationContainer = document.querySelector('.information__container');
 	$pixelize = document.querySelector('#pixelize');
+	$settings = document.querySelectorAll('[data-setting]');
 	$originalImage = document.querySelector('#original-image');
 	$newImage = document.querySelector('#new-image');
+
+//	settings.canvasHeight = $canvas.scrollHeight;
+// 	settings.canvasWidth = $canvas.scrollHeight;
 
 	$fileInput.addEventListener('change', updateImage);
 	$settings.forEach($setting => {
@@ -76,12 +87,15 @@ function resetVariables() {
 }
 
 function updateImage() {
+	$fileInputLabel.dataset.loading = true;
+	$fileInputLabel.disabled = true;
+
 	const files = $fileInput.files;
 	if (files.length > 0) {
 		reset();
 
 		var originalctx = $originalImage.getContext('2d');
-		var newctx = $newImage.getContext('2d');
+		
 		var img = new Image();
 		img.addEventListener('load', (e) => {
 
@@ -105,9 +119,11 @@ function updateImage() {
 			const widthGap = (settings.canvasWidth - width) / 2;
 
 			originalctx.drawImage(img, widthGap, heightGap, width, height);
-			newctx.drawImage(img, widthGap, heightGap, width, height);
+			
 
 			getOriginalUniqueColors();
+			$fileInputLabel.dataset.loading = false;
+			$fileInputLabel.disabled = false;
 		});
 		img.src = URL.createObjectURL(files[0]);
 	}
@@ -193,7 +209,6 @@ function getColorMap() {
 		}
 	}
 
-	console.log(`${performance.now() - startTime} milliseconds`, loops);
 	var startTime = performance.now();
 
 	// Reduce the number of unique colors
@@ -239,8 +254,6 @@ function getColorMap() {
 			return second[1] - first[1];
 		});
 	}
-
-	console.log(`${performance.now() - startTime} milliseconds`);
 }
 
 function pixelize() {
@@ -248,6 +261,9 @@ function pixelize() {
 	newUniqueColors = {};
 	uniqueColorArray = [];
 	colorMap = {};
+
+	$pixelize.dataset.loading = true;
+	$pixelize.disabled = true;
 
 	if (settings.useMaxUniqueColors) {
 		getColorMap();
@@ -270,15 +286,23 @@ function pixelize() {
 				const closestColor = colorMap[`${ red }-${ green }-${ blue }`];
 				if (closestColor) {
 					[red, green, blue] = closestColor.split('-');
-				}
-			}
 
-			let color = new Color(red, green, blue);
-			if (newUniqueColors[color]) {
-				newUniqueColors[color]++;
-			}
-			else {
-				newUniqueColors[color] = 1;
+					let color = new Color(red, green, blue);
+					if (newUniqueColors[color]) {
+						newUniqueColors[color]++;
+					}
+					else {
+						newUniqueColors[color] = 1;
+					}
+				}
+			} else {
+				let color = new Color(red, green, blue);
+				if (newUniqueColors[color]) {
+					newUniqueColors[color]++;
+				}
+				else {
+					newUniqueColors[color] = 1;
+				}
 			}
 
 			for (var k = 0; k < pixelCount; k += 4) {
@@ -289,6 +313,9 @@ function pixelize() {
 			}
 
 			newctx.putImageData(imgd, i * settings.pixelSize, j * settings.pixelSize);
+
+			$pixelize.dataset.loading = false;
+			$pixelize.disabled = false;
 		}
 	}
 
@@ -297,12 +324,21 @@ function pixelize() {
 }
 
 function updateInfo() {
-	$uniqueColorCount = document.querySelector('#uniqueColorCount');
-	$topUniqueColors = document.querySelector('#topUniqueColors');
+	const $originalUniqueColorCount = document.querySelector('#originalUniqueColorCount');
+	const $pixelizerUniqueColorCount = document.querySelector('#pixelizerUniqueColorCount');
+	const $topUniqueColorsContainer = document.querySelector('.information__top-colors__container');
+	const $topUniqueColors = document.querySelector('#topUniqueColors');
 
-	$uniqueColorCount.innerHTML = `The original image used ${ nf.format(Object.keys(originalUniqueColors).length) } unique colors. In the Pixelizer version, only ${ nf.format(Object.keys(newUniqueColors).length) } colors were used.`;
+	$originalUniqueColorCount.innerHTML = nf.format(Object.keys(originalUniqueColors).length);
+	$pixelizerUniqueColorCount.innerHTML = nf.format(Object.keys(newUniqueColors).length);
 
-	let topUniqueColorsHTML = '';
+	if (uniqueColorArray.length > 0) {
+		$topUniqueColorsContainer.ariaHidden = false;
+	} else {
+		$topUniqueColorsContainer.ariaHidden = true;
+	}
+
+	$topUniqueColors.innerHTML = '';
 	uniqueColorArray.slice(0, 3).forEach(uniqueColor => {
 		const color = uniqueColor[0].split('-');
 		const count = uniqueColor[1];
@@ -314,19 +350,44 @@ function updateInfo() {
 			textColor = 'white';
 		}
 
-		topUniqueColorsHTML += `<span style="background-color: rgb(${ color[0] },${ color[1] },${ color[2] }); color: ${ textColor };">${ nf.format(count) }</span>`;
+		const $uniqueColorContainer = document.createElement('div');
+		$uniqueColorContainer.classList.add('unique-color__container');
+		$uniqueColorContainer.style.backgroundColor = `rgb(${ color[0] },${ color[1] },${ color[2] })`;
+		$uniqueColorContainer.style.color = textColor;
+		$topUniqueColors.appendChild($uniqueColorContainer);
+
+		const $uniqueColor = document.createElement('p');
+		$uniqueColor.classList.add('unique-color__color');
+		$uniqueColor.innerHTML = convertRGBtoHEX(color);
+		$uniqueColor.dataset.fontWeight = 'bold';
+		$uniqueColorContainer.appendChild($uniqueColor);
+
+		const $uniqueColorCount = document.createElement('p');
+		$uniqueColorCount.innerHTML = `used ${ nf.format(count) } times`;
+		$uniqueColorCount.dataset.textAlign = 'center';
+		$uniqueColorContainer.appendChild($uniqueColorCount);
 	});
-	$topUniqueColors.innerHTML = topUniqueColorsHTML;
 }
 
 function showInfo() {
-	$informationContainer = document.querySelector('.information__container');
-	$informationContainer.style.display = 'block';
+	$informationContainer.ariaHidden = false;
 }
 
 function hideInfo() {
-	$informationContainer = document.querySelector('.information__container');
-	$informationContainer.style.display = 'none';
+	$informationContainer.ariaHidden = true;
+}
+
+/** 
+ * 
+ * @param {Array} rgb RGB color in array
+ */
+ function convertRGBtoHEX(rgb) {
+	function componentToHex(c) {
+		var hex = Number(c).toString(16).toUpperCase();
+		return hex.length == 1 ? "0" + hex : hex;
+	}
+
+	return `#${ componentToHex(rgb[0]) }${ componentToHex(rgb[1]) }${ componentToHex(rgb[2]) }`;
 }
 
 /** 

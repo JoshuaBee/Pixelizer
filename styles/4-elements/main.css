@@ -1,0 +1,16 @@
+/*--------------------------------//
+//                                //
+//              Main              //
+//                                //
+//--------------------------------*/
+main {
+	margin: auto;
+	max-width: 1500px;
+	padding: 3rem 1rem;
+}
+
+@media (min-width: 640px) {
+	main {
+		padding: 3rem;
+	}
+}

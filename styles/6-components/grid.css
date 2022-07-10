@@ -1,0 +1,68 @@
+/*--------------------------------//
+//                                //
+//             Grid             //
+//                                //
+//--------------------------------*/
+.grid {
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-rows: auto;
+	grid-template-areas: 
+		"header"
+		"canvas1"
+		"settings"
+		"canvas2";
+	position: relative;
+}
+
+@media (min-width: 1536px) {
+	.grid {
+		grid-template-columns: 512px minmax(0, 1fr) 512px;
+		grid-template-areas: 
+			"canvas1 header canvas2"
+			"canvas1 settings canvas2";
+	}
+}
+
+#header {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	grid-area: header;
+}
+
+#original-image {
+	grid-area: canvas1;
+	margin: 0 auto;
+}
+
+#settings {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+	grid-area: settings;
+	justify-content: end;
+}
+
+#new-image {
+	grid-area: canvas2;
+	margin: 0 auto;
+}
+
+.header__title {
+	margin-bottom: 1rem;
+}
+
+.header__subtitle {
+	margin-bottom: 2rem;
+}
+
+.settings__title {
+	margin-bottom: 1rem;
+}
+
+#pixelize {
+	margin-top: 1rem;
+}

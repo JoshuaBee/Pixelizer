@@ -6,3 +6,15 @@
 input[type="file"] {
 	opacity: 0;
 }
+
+input[type="number"] {
+	margin-left: 2rem;
+	width: 3rem;
+}
+
+.input-group {
+	display: flex;
+	justify-content: space-between;
+	max-width: 512px;
+	width: 100%;
+}

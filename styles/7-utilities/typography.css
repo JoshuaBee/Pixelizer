@@ -1,0 +1,57 @@
+/*--------------------------------//
+//                                //
+//           Typography           //
+//                                //
+//--------------------------------*/
+
+[data-font-family="pixel"] {
+	font-family: 'Press Start 2P', sans-serif;
+	margin-right: -3px;
+	vertical-align: middle;
+}
+
+[data-font-family="roboto"] {
+	font-family: 'Roboto', sans-serif;
+}
+
+[data-font-size="2"] {
+	font-size: 1.5rem;
+}
+
+[data-font-size="1.5"] {
+	font-size: 1.125rem;
+}
+
+[data-font-size="1.2"] {
+	font-size: .9rem;
+}
+
+[data-font-size="1"] {
+	font-size: .75rem;
+}
+
+@media (min-width: 640px) {
+	[data-font-size="2"] {
+		font-size: 2rem;
+	}
+	
+	[data-font-size="1.5"] {
+		font-size: 1.5rem;
+	}
+	
+	[data-font-size="1.2"] {
+		font-size: 1.2rem;
+	}
+	
+	[data-font-size="1"] {
+		font-size: 1rem;
+	}
+}
+
+[data-font-weight="bold"] {
+	font-weight: bold;
+}
+
+[data-text-align="center"] {
+	text-align: center;
+}
