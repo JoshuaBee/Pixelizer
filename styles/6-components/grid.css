@@ -41,7 +41,7 @@
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	gap: .5rem;
+	gap: 1rem;
 	grid-area: settings;
 	justify-content: end;
 }
