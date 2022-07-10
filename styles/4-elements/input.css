@@ -18,6 +18,7 @@ input[type="checkbox"] {
 }
 
 .input-group {
+	align-items: center;
 	display: flex;
 	justify-content: space-between;
 	max-width: 512px;
