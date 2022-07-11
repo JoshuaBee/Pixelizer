@@ -67,6 +67,10 @@
 	text-transform: uppercase;
 }
 
+.button[data-loading="true"] .button__text {
+	padding-right: 3.25rem;
+}
+
 .button[data-loading="true"] .button__text::after {
 	overflow: hidden;
 	display: inline-block;
@@ -74,12 +78,13 @@
 	-webkit-animation: ellipsis steps(4, end) 900ms infinite;      
 	animation: ellipsis steps(4, end) 900ms infinite;
 	content: "...";
+	position: absolute;
 	width: 0px;
 }
   
 @keyframes ellipsis {
 	to {
-		width: 70px;    
+		width: 4.375rem;    
 	}
 }
 
