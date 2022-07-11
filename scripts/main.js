@@ -265,6 +265,14 @@ function pixelize() {
 	$pixelize.dataset.loading = true;
 	$pixelize.disabled = true;
 
+	const worker = new Worker("./worker.js");
+	worker.postMessage('test');
+    console.log('Message posted to worker');
+
+	worker.onmessage = (e) => {
+		console.log('Message received from worker', e.data);
+	}
+
 	if (settings.useMaxUniqueColors) {
 		getColorMap();
 	}
