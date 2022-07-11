@@ -161,102 +161,10 @@ function getOriginalUniqueColors() {
 	}
 }
 
-function getColorMap() {
-	// Create items array
-	uniqueColorArray = Object.keys(originalUniqueColors).map(function(key) {
-		return [key, originalUniqueColors[key]];
-	});
-	// Sort the array based on the second element
-	uniqueColorArray.sort(function(first, second) {
-		return second[1] - first[1];
-	});
-
-	var startTime = performance.now();
-
-	// Group the colours together.
-	let color1;
-	let colorIndex1 = 0;
-	let color2;
-	let color2LAB;
-	let colorIndex2 = 1;
-	let removal = false;
-	let loops = 0;
-	while (colorIndex2 < uniqueColorArray.length) {
-		removal = false;
-		color2 = uniqueColorArray[colorIndex2][0].split('-');
-		color2LAB = convertRGBtoLAB(color2);
-		color2Count = uniqueColorArray[colorIndex2][1];
-
-		for (colorIndex1 = 0; colorIndex1 < colorIndex2; colorIndex1++) {
-			loops += 1;
-			color1 = uniqueColorArray[colorIndex1][0];
-			if (deltaE(convertRGBtoLAB(color1.split('-')), color2LAB) <= settings.maxColorDistance) {
-				// Update color1 count
-				uniqueColorArray[colorIndex1][1] += color2Count;
-
-				// Add to color map
-				colorMap[uniqueColorArray[colorIndex2][0]] = color1;
-
-				// Remove color2
-				uniqueColorArray.splice(colorIndex2, 1);
-				removal = true;
-				break;
-			}
-		}
-
-		if (!removal) {
-			colorIndex2++;
-		}
-	}
-
-	var startTime = performance.now();
-
-	// Reduce the number of unique colors
-	while (uniqueColorArray.length > settings.maxUniqueColors) {
-		let scoreMin = Infinity;
-		let scoreMinColor1Index;
-		let scoreMinColor2Index;
-
-		// Calculate the distances between all the unique colors
-		for (let colorIndex1 = 0; colorIndex1 < uniqueColorArray.length; colorIndex1++) {
-			let color1 = uniqueColorArray[colorIndex1][0].split('-');
-
-			for (let colorIndex2 = colorIndex1 + 1; colorIndex2 < uniqueColorArray.length; colorIndex2++) {
-				let color2 = uniqueColorArray[colorIndex2][0].split('-');
-
-				let score = deltaE(convertRGBtoLAB(color1), convertRGBtoLAB(color2));
-				if (score < scoreMin) {
-					scoreMin = score;
-					scoreMinColor1Index = colorIndex1;
-					scoreMinColor2Index = colorIndex2;
-				}
-			}
-		}
-
-		// Update color1 count
-		uniqueColorArray[scoreMinColor1Index][1] += uniqueColorArray[scoreMinColor2Index][1];
-
-		// Update color map
-		let color1 = uniqueColorArray[scoreMinColor1Index][0];
-		let color2 = uniqueColorArray[scoreMinColor2Index][0];
-		Object.entries(colorMap).forEach(([key, value]) => {
-			if (value === color2) {
-				colorMap[key] = color1;
-			}
-		});
-		colorMap[color2] = color1;
-
-		// Remove color2
-		uniqueColorArray.splice(scoreMinColor2Index, 1);
-
-		// Resort
-		uniqueColorArray.sort(function(first, second) {
-			return second[1] - first[1];
-		});
-	}
-}
-
 function pixelize() {
+	var totalStartTime = performance.now();
+	var startTime = performance.now();
+
 	// Reset variables
 	newUniqueColors = {};
 	uniqueColorArray = [];
@@ -265,17 +173,23 @@ function pixelize() {
 	$pixelize.dataset.loading = true;
 	$pixelize.disabled = true;
 
-	const worker = new Worker("./scripts/worker.js");
-	worker.postMessage('test');
-    console.log('Message posted to worker');
-
-	worker.onmessage = (e) => {
-		console.log('Message received from worker', e.data);
-	}
-
 	if (settings.useMaxUniqueColors) {
-		getColorMap();
+		const worker = new Worker("./scripts/worker.js");
+		worker.postMessage({
+			originalUniqueColors,
+			maxColorDistance: settings.maxColorDistance,
+			maxUniqueColors: settings.maxUniqueColors
+		});
+		console.log('Message posted to worker');
+
+		worker.onmessage = (e) => {
+			console.log('Message received from worker', e.data);
+			({ colorMap, uniqueColorArray } = e.data);
+		}
 	}
+
+	console.log('getColorMap time: ', performance.now() - startTime);
+	var startTime = performance.now();
 
 	const middleIndex = (4 * Math.floor(((settings.pixelSize ** 2) / 2)));
 	var newctx = $newImage.getContext('2d');
@@ -329,6 +243,9 @@ function pixelize() {
 
 	updateInfo();
 	showInfo();
+
+	console.log('The rest time: ', performance.now() - startTime);
+	console.log('Total time: ', performance.now() - totalStartTime);
 }
 
 function updateInfo() {
@@ -449,7 +366,7 @@ function convertRGBtoLAB(rgb) {
 	var deltaHkhsh = deltaH / (sh);
 	var i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
 	return i < 0 ? 0 : Math.sqrt(i);
-  }
+}
 
 // https://developers.google.com/web/ilt/pwa/lab-offline-quickstart#52_activating_the_install_prompt
 window.addEventListener('beforeinstallprompt', (event) => {
