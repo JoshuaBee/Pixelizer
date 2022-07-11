@@ -265,7 +265,7 @@ function pixelize() {
 	$pixelize.dataset.loading = true;
 	$pixelize.disabled = true;
 
-	const worker = new Worker("./worker.js");
+	const worker = new Worker("./scripts/worker.js");
 	worker.postMessage('test');
     console.log('Message posted to worker');
 
