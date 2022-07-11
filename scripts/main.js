@@ -175,6 +175,8 @@ function pixelize() {
 
 	if (settings.useMaxUniqueColors) {
 		const worker = new Worker("./scripts/worker.js");
+
+		var startTime = performance.now();
 		worker.postMessage({
 			originalUniqueColors,
 			maxColorDistance: settings.maxColorDistance,
@@ -185,10 +187,16 @@ function pixelize() {
 		worker.onmessage = (e) => {
 			console.log('Message received from worker', e.data);
 			({ colorMap, uniqueColorArray } = e.data);
-		}
-	}
 
-	console.log('getColorMap time: ', performance.now() - startTime);
+			console.log('worker time: ', performance.now() - startTime);
+			updateCanvas();
+		}
+	} else {
+		updateCanvas();
+	}
+}
+
+function updateCanvas() {
 	var startTime = performance.now();
 
 	const middleIndex = (4 * Math.floor(((settings.pixelSize ** 2) / 2)));
@@ -243,9 +251,7 @@ function pixelize() {
 
 	updateInfo();
 	showInfo();
-
-	console.log('The rest time: ', performance.now() - startTime);
-	console.log('Total time: ', performance.now() - totalStartTime);
+	console.log('updateCanvas time: ', performance.now() - startTime);
 }
 
 function updateInfo() {
