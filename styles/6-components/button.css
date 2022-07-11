@@ -16,7 +16,6 @@
 	-ms-user-select: none;
 	user-select: none;
 	cursor: pointer;
-	outline: 0;
 	border: none;
 	-webkit-tap-highlight-color: transparent;
 	display: inline-flex;
@@ -31,6 +30,20 @@
 	padding: 0.25rem 1rem;
 	border-radius: 0.25rem;
 	overflow: visible;
+	outline-color: #FFD60A;
+	outline-color: var(--color-primary);
+	outline-offset: 0.25rem;
+	outline-style: solid;
+	outline-width: 0;
+}
+
+.button:active,
+.button:focus {
+	outline-width: 0.125rem;
+}
+
+.button[disabled] {
+	cursor: not-allowed;
 }
 
 .button::before {
@@ -55,8 +68,8 @@
 	opacity: 0.2;
 }
 
-.button:active::before {
-	opacity: 0.4;
+.button[disabled] {
+	opacity: 0.5;
 }
 
 .button__text {

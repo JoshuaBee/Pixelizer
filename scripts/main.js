@@ -27,6 +27,7 @@ var $informationContainer;
 var $newImage;
 var $originalImage;
 var $pixelize;
+var $download;
 var $settings;
 
 let originalUniqueColors = {};
@@ -51,24 +52,29 @@ document.addEventListener('DOMContentLoaded', () => {
 	$fileInput = document.querySelector('input[type="file"]');
 	$informationContainer = document.querySelector('.information__container');
 	$pixelize = document.querySelector('#pixelize');
+	$download = document.querySelector('#download');
 	$settings = document.querySelectorAll('[data-setting]');
 	$originalImage = document.querySelector('#original-image');
 	$newImage = document.querySelector('#new-image');
-
-//	settings.canvasHeight = $canvas.scrollHeight;
-// 	settings.canvasWidth = $canvas.scrollHeight;
 
 	$fileInput.addEventListener('change', updateImage);
 	$settings.forEach($setting => {
 		$setting.addEventListener('change', settingChange);
 	});
 	$pixelize.addEventListener('click', pixelize);
+	$download.addEventListener('click', download);
 });
 
 function reset() {
+	resetButtons();
 	resetVariables();
 	resetImage();
 	hideInfo();
+}
+
+function resetButtons() {
+	$pixelize.disabled = true;
+	$download.disabled = true;
 }
 
 function resetImage() {
@@ -124,6 +130,8 @@ function updateImage() {
 			getOriginalUniqueColors();
 			$fileInputLabel.dataset.loading = false;
 			$fileInputLabel.disabled = false;
+
+			$pixelize.disabled = false;
 		});
 		img.src = URL.createObjectURL(files[0]);
 	}
@@ -162,9 +170,6 @@ function getOriginalUniqueColors() {
 }
 
 function pixelize() {
-	var totalStartTime = performance.now();
-	var startTime = performance.now();
-
 	// Reset variables
 	newUniqueColors = {};
 	uniqueColorArray = [];
@@ -173,7 +178,7 @@ function pixelize() {
 	$pixelize.dataset.loading = true;
 	$pixelize.disabled = true;
 
-	if (settings.useMaxUniqueColors) {
+	if (window.Worker && settings.useMaxUniqueColors) {
 		const worker = new Worker("./scripts/worker.js");
 
 		worker.postMessage({
@@ -243,6 +248,8 @@ function updateCanvas() {
 		}
 	}
 
+	$download.disabled = false;
+
 	updateInfo();
 	showInfo();
 }
@@ -299,6 +306,13 @@ function showInfo() {
 
 function hideInfo() {
 	$informationContainer.ariaHidden = true;
+}
+
+function download() {
+	const link = document.createElement('a');
+	link.download = 'pixelizer.png';
+	link.href = $newImage.toDataURL();
+	link.click();
 }
 
 /** 

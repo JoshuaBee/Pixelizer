@@ -55,7 +55,7 @@
 
 					<p class="header__subtitle" data-font-size="1.5" data-text-align="center">Upload a photo and <span data-font-family="pixel" data-font-size="1">pixelize</span> it!</p>
 
-					<label id="upload" class="button">
+					<label id="upload" class="button" tabindex="0">
 						<span class="button__text">Upload</span>
 		
 						<input
@@ -63,6 +63,7 @@
 							class="visually-hidden"
 							id="photo_upload"
 							accept="image/png, image/jpeg"
+							tabindex="-1"
 						/>
 					</label>
 				</div>
@@ -100,12 +101,18 @@
 						<input id="max-color-distance-input" type="number" data-setting="maxColorDistance" value="10" min="1" />
 					</div>
 					
-					<button id="pixelize" class="button">
+					<button id="pixelize" class="button" disabled>
 						<span class="button__text">Pixelize</span>
 					</button>
 				</div>
 	
 				<canvas id="new-image" height="512" width="512"></canvas>
+
+				<div id="download-container">
+					<button id="download" class="button" disabled>
+						<span class="button__text">Download</span>
+					</button>
+				</div>
 			</div>
 
 			<div class="information__container" aria-hidden="true">

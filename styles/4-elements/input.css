@@ -3,6 +3,11 @@
 //             Input              //
 //                                //
 //--------------------------------*/
+input {
+	outline-color: #FFD60A;
+	outline-color: var(--color-primary);
+}
+
 input[type="file"] {
 	opacity: 0;
 }

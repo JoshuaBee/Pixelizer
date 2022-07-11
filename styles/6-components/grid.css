@@ -12,7 +12,8 @@
 		"header"
 		"canvas1"
 		"settings"
-		"canvas2";
+		"canvas2"
+		"download";
 	position: relative;
 }
 
@@ -65,4 +66,18 @@
 
 #pixelize {
 	margin-top: 1rem;
+}
+
+#download-container {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	grid-area: download;
+	margin-top: 1rem;
+}
+
+@media (min-width: 1536px) {
+	#download-container {
+		display: none;
+	}
 }
