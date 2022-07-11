@@ -1,6 +1,3 @@
-// Accepts originalUniqueColors, settings.maxColorDistance, settings.maxUniqueColors
-// Returns colorMap, uniqueColorArray
-
 onmessage = (e) => {
 	const { originalUniqueColors, maxColorDistance, maxUniqueColors } = e.data;
 

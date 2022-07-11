@@ -176,19 +176,15 @@ function pixelize() {
 	if (settings.useMaxUniqueColors) {
 		const worker = new Worker("./scripts/worker.js");
 
-		var startTime = performance.now();
 		worker.postMessage({
 			originalUniqueColors,
 			maxColorDistance: settings.maxColorDistance,
 			maxUniqueColors: settings.maxUniqueColors
 		});
-		console.log('Message posted to worker');
 
 		worker.onmessage = (e) => {
-			console.log('Message received from worker', e.data);
 			({ colorMap, uniqueColorArray } = e.data);
 
-			console.log('worker time: ', performance.now() - startTime);
 			updateCanvas();
 		}
 	} else {
@@ -197,8 +193,6 @@ function pixelize() {
 }
 
 function updateCanvas() {
-	var startTime = performance.now();
-
 	const middleIndex = (4 * Math.floor(((settings.pixelSize ** 2) / 2)));
 	var newctx = $newImage.getContext('2d');
 	var originalctx = $originalImage.getContext('2d'); 
@@ -251,7 +245,6 @@ function updateCanvas() {
 
 	updateInfo();
 	showInfo();
-	console.log('updateCanvas time: ', performance.now() - startTime);
 }
 
 function updateInfo() {
