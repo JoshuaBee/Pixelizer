@@ -1,0 +1,32 @@
+{
+  "background_color": "#02773E",
+	"description": "📷 Take a photo and pixelize it!",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "images/logos/logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/logos/logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "name": "Pixelizer",
+  "screenshots" : [
+    {
+      "src": "images/screenshots/screenshot1.webp",
+      "sizes": "3360x1664",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Homescreen of Pixelizer"
+    }
+  ],
+  "short_name": "Pixelizer",
+  "start_url": "/",
+  "theme_color": "#02773E"
+}
