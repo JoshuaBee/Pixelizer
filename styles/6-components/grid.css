@@ -17,7 +17,7 @@
 	position: relative;
 }
 
-@media (min-width: 1536px) {
+@media (min-width: 1600px) {
 	.grid {
 		grid-template-columns: 512px minmax(0, 1fr) 512px;
 		grid-template-areas: 
@@ -76,7 +76,7 @@
 	margin-top: 1rem;
 }
 
-@media (min-width: 1536px) {
+@media (min-width: 1600px) {
 	#download-container {
 		display: none;
 	}
