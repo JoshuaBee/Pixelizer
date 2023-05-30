@@ -4,9 +4,7 @@
 //                                //
 //--------------------------------*/
 .button {
-	color: #FFF;
 	color: var(--color-primary-text);
-	background-color: #FFD60A;
 	background-color: var(--color-primary);
 	box-sizing: border-box;
 	font-family: 'Press Start 2P', sans-serif;
@@ -30,7 +28,6 @@
 	padding: 0.25rem 1rem;
 	border-radius: 0.25rem;
 	overflow: visible;
-	outline-color: #FFD60A;
 	outline-color: var(--color-primary);
 	outline-offset: 0.25rem;
 	outline-style: solid;
@@ -47,7 +44,6 @@
 }
 
 .button::before {
-	background-color: #FFF;
 	background-color: var(--color-primary-text);
 	opacity: 0;
 	transition: opacity .2s ease;

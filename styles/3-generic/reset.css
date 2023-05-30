@@ -61,18 +61,14 @@ a {
 
 /* change colours to suit your needs */
 ins {
-	background-color:#000;
 	background-color:var(--color-primary);
-	color:#FFF;
 	color:var(--color-primary-text);
 	text-decoration:none;
 }
 
 /* change colours to suit your needs */
 mark {
-	background-color:#000;
 	background-color:var(--color-primary);
-	color:#FFF;
 	color:var(--color-primary-text);
 	font-style:italic;
 	font-weight:700;
@@ -97,7 +93,6 @@ hr {
 	display:block;
 	height:1px;
 	border:0;
-	border-top:1px solid #000;
 	border-top:1px solid var(--color-primary);
 	margin:1rem 0;
 	padding:0;

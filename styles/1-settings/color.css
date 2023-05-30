@@ -4,31 +4,65 @@
 //                                //
 //--------------------------------*/
 :root {
+	--hue: 153;
+
+	--color-primary-1: oklch(90% 0.175 var(--hue));
+	--color-primary-2: oklch(80% 0.205 var(--hue));
+	--color-primary-3: oklch(70% 0.18 var(--hue));
+	--color-primary-4: oklch(60% 0.154 var(--hue));
+	--color-primary-5: oklch(50% 0.128 var(--hue));
+	--color-primary-6: oklch(40% 0.102 var(--hue));
+	--color-primary-7: oklch(30% 0.077 var(--hue));
+	--color-primary-8: oklch(20% 0.051 var(--hue));
+	--color-primary-9: oklch(10% 0.025 var(--hue));
+	
 	/*
 		Primary Color
 	*/
-	--color-primary: #FFD60A;
-	--color-primary-text: #000;
+	--color-primary: var(--color-primary-5);
+	--color-primary-text: var(--color-primary-9);
 	
 	/*
 		Background
 	*/
-	--color-background: #000;
-	--color-background-text: #FFF;
+	--color-background: var(--color-primary-1);
+	--color-background-text: var(--color-primary-9);
 }
 
-@media (prefers-color-scheme: light) {
+@media (color-gamut: p3) {
 	:root {
-		/*
-			Primary Color
-		*/
-		--color-primary: #FFD60A;
-		--color-primary-text: #000;
-		
+		--color-primary-1: oklch(90% 0.196 var(--hue));
+		--color-primary-2: oklch(80% 0.286 var(--hue));
+		--color-primary-3: oklch(70% 0.25 var(--hue));
+		--color-primary-4: oklch(60% 0.214 var(--hue));
+		--color-primary-5: oklch(50% 0.178 var(--hue));
+		--color-primary-6: oklch(40% 0.143 var(--hue));
+		--color-primary-7: oklch(30% 0.107 var(--hue));
+		--color-primary-8: oklch(20% 0.071 var(--hue));
+		--color-primary-9: oklch(10% 0.035 var(--hue));
+	}
+}
+
+@media (color-gamut: rec2020) {
+	:root {
+		--color-primary-1: oklch(90% 0.233 var(--hue));
+		--color-primary-2: oklch(80% 0.399 var(--hue));
+		--color-primary-3: oklch(70% 0.391 var(--hue));
+		--color-primary-4: oklch(60% 0.335 var(--hue));
+		--color-primary-5: oklch(50% 0.279 var(--hue));
+		--color-primary-6: oklch(40% 0.223 var(--hue));
+		--color-primary-7: oklch(30% 0.167 var(--hue));
+		--color-primary-8: oklch(20% 0.112 var(--hue));
+		--color-primary-9: oklch(10% 0.057 var(--hue));
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
 		/*
 			Background
 		*/
-		--color-background: #EEE;
-		--color-background-text: #000;
+		--color-background: var(--color-primary-9);
+		--color-background-text: var(--color-primary-2);
 	}
 }

@@ -13,9 +13,7 @@ footer {
 	flex-wrap: nowrap;              /* default value; can be omitted */
 	justify-content: space-between; /* switched from default (flex-start, see below) */
 
-	background-color: #FFAA1C;
 	background-color: var(--color-primary);
-	color: #000;
 	color: var(--color-primary-text);
 	box-sizing: border-box;
 	padding: 1rem;

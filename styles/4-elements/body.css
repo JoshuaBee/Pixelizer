@@ -5,9 +5,7 @@
 //--------------------------------*/
 body {
 	align-items: center;
-	color: #FFF;
 	color: var(--color-background-text);
-	background-color: #000;
 	background-color: var(--color-background);
 	display: flex;
     flex-direction: column;

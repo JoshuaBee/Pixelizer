@@ -4,7 +4,6 @@
 //                                //
 //--------------------------------*/
 input {
-	outline-color: #FFD60A;
 	outline-color: var(--color-primary);
 }
 
